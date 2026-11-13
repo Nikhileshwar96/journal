@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base window theme; all real styling is done in Compose (Material 3). -->
+    <style name="Theme.DailyJournal" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+
+    <!-- Splash screen (androidx.core:core-splashscreen), works back to API 26. -->
+    <style name="Theme.DailyJournal.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.DailyJournal</item>
+    </style>
+</resources>
