@@ -38,7 +38,12 @@ The debug APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 
 ### 1. Generate the upload keystore (one time)
 
-Keep it **outside** the repo and back it up somewhere safe:
+Keep it **outside** the repo and back it up somewhere safe. `keytool` does not create missing
+folders, so create the folder first:
+
+```bash
+mkdir -p ~/keystores
+```
 
 ```bash
 keytool -genkeypair -v -keystore ~/keystores/daily-journal-upload.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000
