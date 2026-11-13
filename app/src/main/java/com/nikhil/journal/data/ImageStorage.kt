@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.net.Uri
 import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -33,6 +34,10 @@ class ImageStorage(context: Context) {
 
     /** A fresh temp file for the camera app to write into (exposed via FileProvider). */
     fun newCameraTempFile(): File = File(cameraDir, "capture_${UUID.randomUUID()}.jpg")
+
+    /** content:// Uri for [file] that the camera app may write to (see res/xml/file_paths.xml). */
+    fun shareableUri(file: File): Uri =
+        FileProvider.getUriForFile(appContext, "${appContext.packageName}.fileprovider", file)
 
     /**
      * Decodes [uri], downscales, fixes EXIF rotation and saves it privately.
