@@ -67,6 +67,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.nikhil.journal.R
 import com.nikhil.journal.ui.AppViewModelProvider
+import com.nikhil.journal.ui.components.centeredContentWidth
 import com.nikhil.journal.ui.components.mediumLabel
 import java.io.File
 import java.time.LocalDate
@@ -141,6 +142,7 @@ fun EditEntryScreen(
                 .consumeWindowInsets(padding)
                 .imePadding()
                 .verticalScroll(rememberScrollState())
+                .centeredContentWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {

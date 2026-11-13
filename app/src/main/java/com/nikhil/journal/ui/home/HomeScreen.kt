@@ -7,6 +7,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -53,6 +54,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.nikhil.journal.R
 import com.nikhil.journal.ui.AppViewModelProvider
+import com.nikhil.journal.ui.components.centeredSidePadding
 import com.nikhil.journal.ui.components.preview
 import com.nikhil.journal.ui.components.relativeLabel
 
@@ -156,9 +158,10 @@ private fun SearchBar(query: String, onQueryChange: (String) -> Unit, onClose: (
 }
 
 @Composable
-private fun EntryList(groups: List<DateGroup>, onOpenEntry: (Long) -> Unit) {
+private fun EntryList(groups: List<DateGroup>, onOpenEntry: (Long) -> Unit) = BoxWithConstraints {
+    val side = centeredSidePadding(maxWidth)
     LazyColumn(
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 96.dp),
+        contentPadding = PaddingValues(start = side, end = side, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxSize(),
     ) {

@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -48,6 +49,7 @@ import coil3.compose.AsyncImage
 import com.nikhil.journal.R
 import com.nikhil.journal.ui.AppViewModelProvider
 import com.nikhil.journal.ui.components.ZoomableImageDialog
+import com.nikhil.journal.ui.components.centeredContentWidth
 import com.nikhil.journal.ui.components.relativeLabel
 import java.io.File
 
@@ -136,6 +138,7 @@ private fun EntryContent(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .centeredContentWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
@@ -162,13 +165,15 @@ private fun EntryContent(
 @Composable
 private fun ImagePager(images: List<File>, onImageClick: (Int) -> Unit) {
     val pagerState = rememberPagerState { images.size }
-    Box {
+    BoxWithConstraints {
+        // 4:3 photos on phones (~270dp tall); capped so text stays visible on tablets.
+        val pagerHeight = (maxWidth * 0.75f).coerceIn(220.dp, 460.dp)
         HorizontalPager(
             state = pagerState,
             pageSpacing = 8.dp,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp),
+                .height(pagerHeight),
         ) { page ->
             AsyncImage(
                 model = images[page],
